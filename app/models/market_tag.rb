@@ -1,0 +1,2 @@
+class MarketTag < ApplicationRecord
+end

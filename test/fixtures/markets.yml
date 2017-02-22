@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  market_name: MyString
+  location: MyString
+  view_count: 1
+
+two:
+  market_name: MyString
+  location: MyString
+  view_count: 1
