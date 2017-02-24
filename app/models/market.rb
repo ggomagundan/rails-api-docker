@@ -5,6 +5,8 @@ class Market < ApplicationRecord
   include Elasticsearch::Model
   include Elasticsearch::Model::Callbacks
 
+  has_many :market_tags
+
   after_save :reload_cache
 
   def reload_cache

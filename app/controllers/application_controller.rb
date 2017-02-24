@@ -1,6 +1,8 @@
 class ApplicationController < ActionController::API
-    
-    private
+
+  include ActiveModel::Serialization
+
+  private
     def page
       @page ||= params[:page] || 1
     end
@@ -10,8 +12,9 @@ class ApplicationController < ActionController::API
     end
 
     def set_pagination_headers(v_name)
+
       pc = instance_variable_get("@#{v_name}")
-      
+
       headers["X-Total-Count"] = pc.total_count
 
       links = []
@@ -23,8 +26,7 @@ class ApplicationController < ActionController::API
     end
 
     def page_link(page, rel)
-      # "<#{posts_url(request.query_parameters.merge(page: page))}>; rel='#{rel}'"
       base_uri = request.url.split("?").first
       "<#{base_uri}?#{request.query_parameters.merge(page: page).to_param}>; rel='#{rel}'"
-    end    
+    end
 end

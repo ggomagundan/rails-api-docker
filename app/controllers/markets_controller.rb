@@ -7,12 +7,18 @@ class MarketsController < ApplicationController
   after_action only: [:index] { set_pagination_headers :markets }
 
   def index
-    fetch_markets 
+    fetch_markets
     @markets = Kaminari.paginate_array(@redis_markets).page(page).per(per_page)
+    #@markets = Market.page(page).per(per_page)
+    @r_markets = @markets.compact.map { |json| Market.new(json) }
+
+    render json: @r_markets, include: ['market_tags']
   end
 
   def show
     MarketJob.perform_later(@market)
+    render json: @market
+
   end
 
   def create
@@ -40,7 +46,10 @@ class MarketsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_market
-      @market = Market.find(params[:id])
+
+      #@market = Market.find(params[:id])
+      fetch_market_from_id(params[:id])
+      @market = Market.new(@redis_market)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

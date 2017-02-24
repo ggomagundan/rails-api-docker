@@ -59,6 +59,12 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'kaminari'
+gem 'pry'
+gem 'pry-remote'
+
+gem 'active_model_serializers', '~> 0.10.0'
+gem 'rack-cors' # For enable CORS
+gem 'rack-attack' # For protect  DDoS, brute force attacks, hammering, etc
 
 gem 'sidekiq'
 
